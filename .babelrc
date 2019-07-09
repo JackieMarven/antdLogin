@@ -1,0 +1,21 @@
+{
+  "presets": ["next/babel"],
+  "plugins": [
+    "inline-dotenv",
+    [
+      "import",
+      {
+        "libraryName": "antd",
+        "style": true
+      }
+    ],
+    [
+      "module-resolver",
+      {
+        "alias": {
+          "dva": "dva-no-router"
+        }
+      }
+    ]
+  ]
+}

@@ -103,7 +103,7 @@ class Logins extends Component {
             {tabs.length ? (
               <React.Fragment>
                 <Tabs
-                  animated={false}
+                  animated={true}
                   className="tabs"
                   activeKey={type}
                   onChange={this.onSwitch}

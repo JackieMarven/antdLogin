@@ -6,9 +6,9 @@ import { Form, Tabs } from "antd";
 import LoginItem from "./LoginItem";
 import LoginTab from "./LoginTab";
 import LoginSubmit from "./LoginSubmit";
-import styles from "./index.less";
+import "./index.less";
 
-class Login extends Component {
+class Logins extends Component {
   static propTypes = {
     className: PropTypes.string,
     defaultActiveKey: PropTypes.string,
@@ -97,37 +97,38 @@ class Login extends Component {
     });
 
     return (
-      // <LoginContext.Provider value={this.getContext()}>
-      <div className={classNames(className, styles.login)}>
-        <Form onSubmit={this.handleSubmit}>
-          {tabs.length ? (
-            <React.Fragment>
-              <Tabs
-                animated={false}
-                className={styles.tabs}
-                activeKey={type}
-                onchange={this.onSwitch}
-                value={this.getContext()}
-              >
-                {TabChildren}
-              </Tabs>
-            </React.Fragment>
-          ) : (
-            children
-          )}
-        </Form>
-      </div>
-      // </LoginContext.Provider>
+      <LoginContext.Provider value={this.getContext()}>
+        <div className={classNames(className, "login")}>
+          <Form onSubmit={this.handleSubmit}>
+            {tabs.length ? (
+              <React.Fragment>
+                <Tabs
+                  animated={false}
+                  className="tabs"
+                  activeKey={type}
+                  onChange={this.onSwitch}
+                  value={this.getContext()}
+                >
+                  {TabChildren}
+                </Tabs>
+                {otherChildren}
+              </React.Fragment>
+            ) : (
+              children
+            )}
+          </Form>
+        </div>
+      </LoginContext.Provider>
     );
   }
 }
 
-Login.Tab = LoginTab;
-Login.Submit = LoginSubmit;
+Logins.Tab = LoginTab;
+Logins.Submit = LoginSubmit;
 Object.keys(LoginItem).forEach(item => {
-  Login[item] = LoginItem[item];
+  Logins[item] = LoginItem[item];
 });
 
 // 经 Form.create() 包装过的组件会自带 this.props.form 属性
 // 详情见 https://ant.design/components/form-cn/
-export default Form.create()(Login);
+export default Form.create()(Logins);

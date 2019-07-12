@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./index.less";
+import "./index.less";
 import { Icon } from "antd";
 
 export default {
@@ -7,7 +7,7 @@ export default {
     props: {
       size: "large",
       id: "userName",
-      prefix: <Icon type="user" className={styles.prefixIcon} />,
+      prefix: <Icon type="user" className="prefixIcon" />,
       placeholder: "admin"
     },
     rules: [
@@ -21,7 +21,8 @@ export default {
     props: {
       size: "large",
       id: "passWord",
-      prefix: <Icon type="lock" className={styles.prefixIcon} />,
+      type: "password",
+      prefix: <Icon type="lock" className="prefixIcon" />,
       placeholder: "admin"
     },
     rules: [
@@ -34,8 +35,7 @@ export default {
   Mobile: {
     props: {
       size: "large",
-      id: "mobile",
-      prefix: <Icon type="mobile" className={styles.prefixIcon} />,
+      prefix: <Icon type="mobile" className="prefixIcon" />,
       placeholder: "Please enter mobile number"
     },
     rules: [
@@ -48,8 +48,7 @@ export default {
   Captcha: {
     props: {
       size: "large",
-      id: "captcha",
-      prefix: <Icon type="mail" className={styles.prefixIcon} />,
+      prefix: <Icon type="mail" className="prefixIcon" />,
       placeholder: "captcha"
     },
     rules: [

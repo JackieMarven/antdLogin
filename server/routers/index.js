@@ -16,6 +16,10 @@ module.exports = app => {
     app.render(req, res, "/login");
   });
 
+  router.get("/test", (req, res, next) => {
+    app.render(req, res, "/test");
+  });
+
   router.use(handler);
 
   return router;

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Alert, Checkbox, Icon } from "antd";
 import Link from "next/link";
-import Login from "../../components/login";
-import styles from "./index.less";
+import Logins from "../../components/login";
+import "./index.less";
 
-const { Tab, Submit, UserName, PassWord, Mobile, Captcha } = Login;
+const { Tab, Submit, UserName, PassWord, Mobile, Captcha } = Logins;
 
 class LoginPage extends Component {
   state = {
@@ -16,11 +16,11 @@ class LoginPage extends Component {
     this.setState({ type });
   };
 
-  handleSubmit = (err, value) => {
-    const { type } = this.state;
+  // 提交操作
+  handleSubmit = () => {};
 
-    // 提交操作
-  };
+  // 获取验证码
+  onGetCaptcha = () => {};
 
   changeAutoLogin = e => {
     this.setState({
@@ -38,11 +38,11 @@ class LoginPage extends Component {
   };
 
   render() {
-    const { Login, submitting } = this.props;
+    // const { login } = this.props;
     const { type, autoLogin } = this.state;
     return (
-      <div className={styles.main}>
-        <Login
+      <div className="main">
+        <Logins
           defaultActiveKey={type}
           onTabChange={this.onTabChange}
           onSubmit={this.handleSubmit}
@@ -51,12 +51,60 @@ class LoginPage extends Component {
           }}
         >
           <Tab key="account" tab="账号密码登录">
-            <UserName name="userName" placeholder="" />
-            <PassWord name="passWord" />
+            <UserName
+              name="userName"
+              placeholder="用户名"
+              rules={[
+                {
+                  required: true,
+                  message: "请输入用户名"
+                }
+              ]}
+            />
+            <PassWord
+              name="passWord"
+              placeholder="密码"
+              rules={[
+                {
+                  required: true,
+                  message: "请输入密码"
+                }
+              ]}
+              onPressEnter={e => {
+                e.preventDefault();
+                this.loginForm.validateFields(this.handleSubmit);
+              }}
+            />
           </Tab>
           <Tab key="mobile" tab="手机号登录">
-            <Mobile name="mobile" />
-            <Captcha name="captcha" />
+            <Mobile
+              name="mobile"
+              placeholder="手机号"
+              rules={[
+                {
+                  required: true,
+                  message: "请输入手机号"
+                },
+                {
+                  pattern: /^1\d{10}$/,
+                  message: "请输入正确的号码"
+                }
+              ]}
+            />
+            <Captcha
+              name="captcha"
+              placeholder="验证码"
+              countDown={120}
+              onGetCaptcha={this.onGetCaptcha}
+              getCaptchaButtonText="获取验证码"
+              getCaptchaSecondText="秒"
+              rules={[
+                {
+                  required: true,
+                  message: "请输入验证码"
+                }
+              ]}
+            />
           </Tab>
           <div>
             <Checkbox checked={autoLogin} onChange={this.changeAutoLogin}>
@@ -66,21 +114,17 @@ class LoginPage extends Component {
               忘记密码
             </a>
           </div>
-          <Submit loading={submitting}>登录</Submit>
-          <div className={styles.other}>
+          <Submit>登录</Submit>
+          <div className="other">
             其他登录方式
-            <Icon type="qq" className={styles.icon} theme="outlined" />
-            <Icon type="wechat" className={styles.icon} theme="outlined" />
-            <Icon
-              type="alipay-circle"
-              className={styles.icon}
-              theme="outlined"
-            />
-            <Link className={styles.register} href="">
-              注册用户
+            <Icon type="qq" className="icon" theme="outlined" />
+            <Icon type="wechat" className="icon" theme="outlined" />
+            <Icon type="alipay-circle" className="icon" theme="outlined" />
+            <Link href="">
+              <a className="register">注册用户</a>
             </Link>
           </div>
-        </Login>
+        </Logins>
       </div>
     );
   }

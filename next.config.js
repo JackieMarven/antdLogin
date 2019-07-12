@@ -6,12 +6,16 @@ if (typeof require !== "undefined") {
 }
 
 module.exports = withLess({
-  cssModules: true,
+  // cssModules: false,
   cssLoaderOptions: {
     importLoaders: 1,
     localIdentName: "[local]___[hash:base64:5]"
   },
   lessLoaderOptions: {
+    javascriptEnabled: true,
+    modifyVars: { "@primary-color": "#1890ff" }
+  },
+  antdLessLoaderOptions: {
     javascriptEnabled: true
   }
 });

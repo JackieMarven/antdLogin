@@ -2,16 +2,16 @@
 import React, { Component } from "react";
 import { Form, Input, Row, Col, Button } from "antd";
 import omit from "omit.js";
-import LoginContext from "./LoginContext.js";
+import LoginContext from "./LoginContext";
 import ItemMap from "./map";
-import styles from "./index.less";
+import "./index.less";
 
 const FormItem = Form.Item;
 
 class WrapFormItem extends Component {
   static defaultProps = {
-    getCaptchaButtonTest: "captcha",
-    getCaptchaSecondText: "second"
+    getCaptchaButtonTest: "获取验证码",
+    getCaptchaSecondText: "秒"
   };
 
   constructor(props) {
@@ -76,7 +76,7 @@ class WrapFormItem extends Component {
   render() {
     const { count } = this.state;
     const {
-      form: { getFiledDecorator }
+      form: { getFieldDecorator }
     } = this.props;
 
     const {
@@ -101,14 +101,14 @@ class WrapFormItem extends Component {
         <FormItem>
           <Row gutter={8}>
             <Col span={16}>
-              {getFiledDecorator(name, options)(
-                <input {...customprops} {...inputProps} />
+              {getFieldDecorator(name, options)(
+                <Input {...customprops} {...inputProps} />
               )}
             </Col>
             <Col span={8}>
               <Button
                 disabled={count}
-                className={styles.getCaptcha}
+                className="getCaptcha"
                 size="large"
                 onClick={this.onGetCaptcha}
               >
@@ -123,7 +123,7 @@ class WrapFormItem extends Component {
     }
     return (
       <FormItem>
-        {getFiledDecorator(name, options)(
+        {getFieldDecorator(name, options)(
           <Input {...customprops} {...otherProps} />
         )}
       </FormItem>
@@ -134,6 +134,7 @@ class WrapFormItem extends Component {
 const LoginItem = {};
 Object.keys(ItemMap).forEach(key => {
   const item = ItemMap[key];
+  // eslint-disable-next-line react/display-name
   LoginItem[key] = props => (
     <LoginContext.Consumer>
       {context => (

@@ -1,37 +1,11 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { Alert, Checkbox, Icon } from "antd";
 import Link from "next/link";
 import Logins from "../../components/login";
-import LoginHeader from "../../components/LoginHeader";
-import GlobalFooter from "../../components/GlobalFooter";
-// import UserLayout from "../../layouts/UserLayouts";
+import UserLayout from "../../layouts/UserLayouts";
 import "./index.less";
 
 const { Tab, Submit, UserName, PassWord, Mobile, Captcha } = Logins;
-
-const links = [
-  {
-    key: "help",
-    title: "帮助",
-    href: ""
-  },
-  {
-    key: "privacy",
-    title: "隐私",
-    href: ""
-  },
-  {
-    key: "terms",
-    title: "团队",
-    href: ""
-  }
-];
-
-const copyright = (
-  <Fragment>
-    Copyright <Icon type="copyright" /> 2019 神威体验技术出品
-  </Fragment>
-);
 
 class LoginPage extends Component {
   state = {
@@ -67,97 +41,93 @@ class LoginPage extends Component {
   render() {
     const { type, autoLogin } = this.state;
     return (
-      <div className="container">
-        <div className="content">
-          {/* <LoginHeader /> */}
-          <div className="main">
-            <Logins
-              defaultActiveKey={type}
-              onTabChange={this.onTabChange}
-              onSubmit={this.handleSubmit}
-              ref={form => {
-                this.loginForm = form;
-              }}
-            >
-              <Tab key="account" tab="账号密码登录">
-                <UserName
-                  name="userName"
-                  placeholder="用户名"
-                  rules={[
-                    {
-                      required: true,
-                      message: "请输入用户名"
-                    }
-                  ]}
-                />
-                <PassWord
-                  name="passWord"
-                  placeholder="密码"
-                  rules={[
-                    {
-                      required: true,
-                      message: "请输入密码"
-                    }
-                  ]}
-                  onPressEnter={e => {
-                    e.preventDefault();
-                    this.loginForm.validateFields(this.handleSubmit);
-                  }}
-                />
-              </Tab>
-              <Tab key="mobile" tab="手机号登录">
-                <Mobile
-                  name="mobile"
-                  placeholder="手机号"
-                  rules={[
-                    {
-                      required: true,
-                      message: "请输入手机号"
-                    },
-                    {
-                      pattern: /^1\d{10}$/,
-                      message: "请输入正确的号码"
-                    }
-                  ]}
-                />
-                <Captcha
-                  name="captcha"
-                  placeholder="验证码"
-                  countDown={120}
-                  onGetCaptcha={this.onGetCaptcha}
-                  getCaptchaButtonText="获取验证码"
-                  getCaptchaSecondText="秒"
-                  rules={[
-                    {
-                      required: true,
-                      message: "请输入验证码"
-                    }
-                  ]}
-                />
-              </Tab>
-              <div>
-                <Checkbox checked={autoLogin} onChange={this.changeAutoLogin}>
-                  自动登录
-                </Checkbox>
-                <a style={{ float: "right" }} href="">
-                  忘记密码
-                </a>
-              </div>
-              <Submit>登录</Submit>
-              <div className="other">
-                其他登录方式
-                <Icon type="qq" className="icon" theme="outlined" />
-                <Icon type="wechat" className="icon" theme="outlined" />
-                <Icon type="alipay-circle" className="icon" theme="outlined" />
-                <Link href="">
-                  <a className="register">注册用户</a>
-                </Link>
-              </div>
-            </Logins>
-          </div>
+      <UserLayout>
+        <div className="main">
+          <Logins
+            defaultActiveKey={type}
+            onTabChange={this.onTabChange}
+            onSubmit={this.handleSubmit}
+            ref={form => {
+              this.loginForm = form;
+            }}
+          >
+            <Tab key="account" tab="账号密码登录">
+              <UserName
+                name="userName"
+                placeholder="用户名"
+                rules={[
+                  {
+                    required: true,
+                    message: "请输入用户名"
+                  }
+                ]}
+              />
+              <PassWord
+                name="passWord"
+                placeholder="密码"
+                rules={[
+                  {
+                    required: true,
+                    message: "请输入密码"
+                  }
+                ]}
+                onPressEnter={e => {
+                  e.preventDefault();
+                  this.loginForm.validateFields(this.handleSubmit);
+                }}
+              />
+            </Tab>
+            <Tab key="mobile" tab="手机号登录">
+              <Mobile
+                name="mobile"
+                placeholder="手机号"
+                rules={[
+                  {
+                    required: true,
+                    message: "请输入手机号"
+                  },
+                  {
+                    pattern: /^1\d{10}$/,
+                    message: "请输入正确的号码"
+                  }
+                ]}
+              />
+              <Captcha
+                name="captcha"
+                placeholder="验证码"
+                countDown={120}
+                onGetCaptcha={this.onGetCaptcha}
+                getCaptchaButtonText="获取验证码"
+                getCaptchaSecondText="秒"
+                rules={[
+                  {
+                    required: true,
+                    message: "请输入验证码"
+                  }
+                ]}
+              />
+            </Tab>
+            <div>
+              <Checkbox checked={autoLogin} onChange={this.changeAutoLogin}>
+                自动登录
+              </Checkbox>
+              <a style={{ float: "right" }} href="">
+                忘记密码
+              </a>
+            </div>
+            <Submit>登录</Submit>
+            <div className="other">
+              其他登录方式
+              <Icon type="qq" className="icon" theme="outlined" />
+              <Icon type="wechat" className="icon" theme="outlined" />
+              <Icon type="alipay-circle" className="icon" theme="outlined" />
+              <Link href="">
+                <a className="register">注册用户</a>
+              </Link>
+            </div>
+          </Logins>
         </div>
-        <GlobalFooter links={links} copyright={copyright} />
-      </div>
+      </UserLayout>
     );
   }
 }

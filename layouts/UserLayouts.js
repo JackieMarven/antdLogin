@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
-// import DocumentTitle from "react-document-title";
 import Link from "next/link";
 import GlobalFooter from "../components/GlobalFooter";
+import logo from "../assets/logo.svg";
 import "./UserLayout.less";
 import { Icon } from "antd";
 
@@ -38,8 +38,10 @@ class UserLayout extends Component {
           <div className="top">
             <div className="header">
               <Link href="/">
-                <img alt="logo" className="logo" />
-                <span className="title">南京大学图书管理系统</span>
+                <a>
+                  <img alt="logo" className="logo" src={logo} />
+                  <span className="title">南京大学图书管理系统</span>
+                </a>
               </Link>
             </div>
             <div className="desc">致力于研究装X领域</div>

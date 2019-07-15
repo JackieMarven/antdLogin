@@ -1,14 +1,16 @@
 import React, { Component } from "react";
-import { Button } from "antd";
+// import { Button } from "antd";
+// import UserLayout from "../../layouts/UserLayouts";
+import LoginHeader from "../../components/LoginHeader";
 import "./index.less";
 
 class page extends Component {
   render() {
     return (
       <div>
-        <Button type="primary" className="btn inp">
-          登录
-        </Button>
+        <LoginHeader>
+          <p>Hello world</p>
+        </LoginHeader>
       </div>
     );
   }

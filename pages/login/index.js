@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Alert, Checkbox, Icon } from "antd";
 import Link from "next/link";
-import Logins from "../../components/login";
-import UserLayout from "../../layouts/UserLayouts";
+import Logins from "../../src/components/login";
+import UserLayout from "../../src/layouts/UserLayouts";
 import "./index.less";
 
 const { Tab, Submit, UserName, PassWord, Mobile, Captcha } = Logins;

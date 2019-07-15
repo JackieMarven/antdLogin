@@ -6,7 +6,7 @@ const routers = require("./routers/index.js");
 
 const { NODE_ENV, PORT } = process.env;
 const dev = NODE_ENV !== "production";
-const port = parseInt(PORT, 10);
+const port = parseInt(PORT, 10) || 3001;
 const app = next({ dev });
 
 app.prepare().then(() => {

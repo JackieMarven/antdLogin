@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "dva";
 import { Alert, Checkbox, Icon } from "antd";
 import Link from "next/link";
 import Logins from "../../src/components/login";
@@ -18,7 +19,23 @@ class LoginPage extends Component {
   };
 
   // 提交操作
-  handleSubmit = () => {};
+  handleSubmit = (err, values) => {
+    const { type } = this.state;
+    if (!err) {
+      const { dispatch } = this.props.login;
+      console.log(dispatch);
+      dispatch({
+        type: "login/login",
+        payload: {
+          ...values,
+          type
+        },
+        callback: data => {
+          console.log(data);
+        }
+      });
+    }
+  };
 
   // 获取验证码
   onGetCaptcha = () => {};
@@ -118,7 +135,7 @@ class LoginPage extends Component {
             <Submit>登录</Submit>
             <div className="other">
               其他登录方式
-              <Icon type="qq" className="icon" theme="outlined" />
+              <Icon type="google" className="icon" theme="outlined" />
               <Icon type="wechat" className="icon" theme="outlined" />
               <Icon type="alipay-circle" className="icon" theme="outlined" />
               <Link href="">
@@ -132,4 +149,10 @@ class LoginPage extends Component {
   }
 }
 
-export default LoginPage;
+const mapStateToProps = state => {
+  return {
+    login: state.login
+  };
+};
+
+export default connect(mapStateToProps)(LoginPage);

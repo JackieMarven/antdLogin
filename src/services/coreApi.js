@@ -7,7 +7,10 @@ const { API_BASE_URL } = process.env;
 const request = route => {
   return axios.create({
     baseURL: `${API_BASE_URL}${route}`, // 请求后台基本路径
-    withCredentials: true // 跨域请求是否提供凭据信息(cookie等),默认是 false
+    // withCredentials: true, // 跨域请求是否提供凭据信息(cookie等),默认是 false
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    }
   });
 };
 

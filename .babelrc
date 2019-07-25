@@ -16,6 +16,12 @@
           "dva": "dva-no-router"
         }
       }
+    ],
+    [
+      "@babel/plugin-proposal-decorators",
+      {
+        "legacy": true
+      }
     ]
   ]
 }

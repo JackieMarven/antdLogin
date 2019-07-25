@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { connect } from "dva";
 import { Alert, Checkbox, Icon } from "antd";
 import Link from "next/link";
-import Logins from "../../src/components/login";
+import Logins from "../../components/Login";
 import UserLayout from "../../src/layouts/UserLayouts";
-import "./index.less";
+import "./login.less";
+import withDva from "../../utils/withDva";
 
 const { Tab, Submit, UserName, PassWord, Mobile, Captcha } = Logins;
 
@@ -22,8 +22,7 @@ class LoginPage extends Component {
   handleSubmit = (err, values) => {
     const { type } = this.state;
     if (!err) {
-      const { dispatch } = this.props.login;
-      console.log(dispatch);
+      const { dispatch } = this.props;
       dispatch({
         type: "login/login",
         payload: {
@@ -137,8 +136,8 @@ class LoginPage extends Component {
               其他登录方式
               <Icon type="google" className="icon" theme="outlined" />
               <Icon type="wechat" className="icon" theme="outlined" />
-              <Icon type="alipay-circle" className="icon" theme="outlined" />
-              <Link href="">
+              <Icon type="qq" className="icon" theme="outlined" />
+              <Link href="/register">
                 <a className="register">注册用户</a>
               </Link>
             </div>
@@ -149,10 +148,6 @@ class LoginPage extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    login: state.login
-  };
-};
-
-export default connect(mapStateToProps)(LoginPage);
+export default withDva(state => {
+  return { status: state.status };
+})(LoginPage);
